@@ -50,7 +50,7 @@ jobs:
 
       - name: Create ECS Cluster if not exists
         run: |
-          aws ecs describe-clusters --clusters $ECS_CLUSTER \
+          aws ecs describe-clusters --clusters $ECS_CLUSTER --query 'length(clusters)' --output text | grep -q '1' \
           || aws ecs create-cluster --cluster-name $ECS_CLUSTER
 
       - name: Register Task Definition
@@ -69,7 +69,7 @@ jobs:
                 "essential": true,
                 "portMappings": [
                   {
-                    "containerPort": 3000,
+                    "containerPort": 8000,
                     "protocol": "tcp"
                   }
                 ]
