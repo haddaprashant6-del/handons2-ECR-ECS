@@ -10,7 +10,7 @@
 # ------------------------------------------------------------------------------
 
 # Stage 1: Build stage with development dependencies
-FROM python:3.9-slim as builder
+FROM python:3.9-slim AS builder
 
 # Set environment variables for build
 ENV PYTHONUNBUFFERED=1 \
@@ -37,12 +37,12 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt
 # ------------------------------------------------------------------------------
 
 # Use minimal base image for production
-FROM python:3.9-slim as production
+FROM python:3.9-slim AS production
 
 # Set environment variables for production
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    DJANGO_SETTINGS_MODULE=myproject.settings.production \
+    DJANGO_SETTINGS_MODULE=hello_world_django_app.settings \
     PATH="/opt/venv/bin:$PATH"
 
 # Install runtime dependencies only
