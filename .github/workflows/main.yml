@@ -12,6 +12,7 @@ env:
   ECS_SERVICE: my-service
   TASK_FAMILY: my-task
   CONTAINER_NAME: my-container
+  EXECUTION_ROLE_ARN: ${{ secrets.EXECUTION_ROLE_ARN }}
 
 jobs:
   deploy:
@@ -62,6 +63,7 @@ jobs:
             "requiresCompatibilities": ["FARGATE"],
             "cpu": "256",
             "memory": "512",
+            "executionRoleArn": "$EXECUTION_ROLE_ARN",
             "containerDefinitions": [
               {
                 "name": "$CONTAINER_NAME",
