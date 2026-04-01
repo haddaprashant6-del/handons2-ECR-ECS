@@ -85,6 +85,3 @@ EXPOSE 8000
 # Application startup
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "hello_world_django_app.wsgi:application"]
 # ------------------------------------------------------------------------------
-
-# Use gunicorn for production WSGI server
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "myproject.wsgi:application"]
