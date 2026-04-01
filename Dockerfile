@@ -76,13 +76,14 @@ RUN python manage.py collectstatic --noinput --clear
 
 # Health check for container orchestration
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD curl -f http://localhost:8000/health/ || exit 1
+    CMD curl -f http://localhost:8000/hello/ || exit 1
 
 # Expose application port
 EXPOSE 8000
 
 # ------------------------------------------------------------------------------
 # Application startup
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "hello_world_django_app.wsgi:application"]
 # ------------------------------------------------------------------------------
 
 # Use gunicorn for production WSGI server
